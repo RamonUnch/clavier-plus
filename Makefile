@@ -32,9 +32,15 @@ LDFLAGS=\
 	-s -mwindows
 
 # 64 bit mode
-CFLAGS=-m64 -march=x86-64
-WRFLAGS=-Fpe-x86-64
-LDFLAGS+=-eWinMainCRTStartup
+#CFLAGS=-m64 -march=x86-64
+#WRFLAGS=-Fpe-x86-64
+#LDFLAGS+=-eWinMainCRTStartup
+#CLDFLAGS=-flto  # link-time-optimization
+
+# 32 bit mode
+CFLAGS=-m32 -march=i386 -mtune=i686 -mpreferred-stack-boundary=2 -DPSAPI_VERSION=1
+WRFLAGS=-Fpe-i386
+LDFLAGS+=-e_WinMainCRTStartup
 CLDFLAGS=-flto  # link-time-optimization
 
 WARNINGS=-Wall -Wno-unknown-pragmas -Wno-multichar -Wno-strict-aliasing

@@ -665,11 +665,11 @@ void listUwpApps(std::function<void(LPCTSTR name, LPCTSTR app_id, LPITEMIDLIST p
 	
 	// Property set only on non-UWP apps.
 	PROPERTYKEY non_uwp_prop_key;
-	VERIFV(SUCCEEDED(PSGetPropertyKeyFromName(_T("System.Link.TargetParsingPath"), &non_uwp_prop_key)));
+//	VERIFV(SUCCEEDED(PSGetPropertyKeyFromName(_T("System.Link.TargetParsingPath"), &non_uwp_prop_key)));
 	
 	// Contains the app ID for UWP apps.
-	PROPERTYKEY id_prop_key;
-	VERIFV(SUCCEEDED(PSGetPropertyKeyFromName(_T("System.AppUserModel.ID"), &id_prop_key)));
+//	PROPERTYKEY id_prop_key;
+//	VERIFV(SUCCEEDED(PSGetPropertyKeyFromName(_T("System.AppUserModel.ID"), &id_prop_key)));
 	
 	// Enumerate the apps folder children, UWP and non-UWP apps alike.
 	CoPtr<IEnumShellItems> enum_apps;
@@ -730,17 +730,17 @@ void listUwpApps(std::function<void(LPCTSTR name, LPCTSTR app_id, LPITEMIDLIST p
 		
 		// Retrieve the ID of the app.
 		TCHAR app_id[kMaxAppIdLength];
-		PROPVARIANT id_prop_value;
-		if (FAILED(uwp_app.props->GetValue(id_prop_key, &id_prop_value)) ||
-				FAILED(PropVariantToString(id_prop_value, app_id, arrayLength(app_id)))) {
-			continue;
-		}
+//		PROPVARIANT id_prop_value;
+//		if (FAILED(uwp_app.props->GetValue(id_prop_key, &id_prop_value)) ||
+//				FAILED(PropVariantToString(id_prop_value, app_id, arrayLength(app_id)))) {
+//			continue;
+//		}
 		
 		// Retrieve the PIDL of the app.
 		CoBuffer<PIDLIST_ABSOLUTE> app_pidl;
-		if (FAILED(SHGetIDListFromObject(uwp_app.item.get(), &app_pidl))) {
-			continue;
-		}
+//		if (FAILED(SHGetIDListFromObject(uwp_app.item.get(), &app_pidl))) {
+//			continue;
+//		}
 		
 		app_callback(app_name, app_id, app_pidl);
 	}
